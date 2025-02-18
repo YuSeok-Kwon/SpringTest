@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.kepg.spring.test.db.repository.StoreRepository">
- 	<select id="selectStoreList" resultType="com.kepg.spring.test.db.domain.Store">
+ 	<select id="selectStoreListId" resultType="com.kepg.spring.test.db.domain.Store">
  		SELECT
  			`id`
  			, `name`

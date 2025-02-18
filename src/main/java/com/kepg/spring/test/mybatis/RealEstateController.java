@@ -68,4 +68,28 @@ public class RealEstateController {
 		int count = realEstateService.addRealEstate(realEstate);
 		return count;
 	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public int updateRealEstate(RealEstate realEstate) {
+		// id가 22인 행의 type을 전세로 바꾸고, price를 70000으로 변경
+		realEstate = new RealEstate();
+		realEstate.setId(22);
+		realEstate.setType("전세");
+		realEstate.setPrice(70000);
+		
+		int count = realEstateService.updateRealEstate(realEstate);
+		
+		return count;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public int deleteRealEstate(@RequestParam("id") int id) {
+		int count = realEstateService.deleteRealEstate(id);
+		
+		return count;
+		
+		
+	}
 }

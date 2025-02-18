@@ -96,4 +96,21 @@
  			, #{price}
 		)
  	</insert>
+ 	<update id="updateRealEstateByObject" parameterType="com.kepg.spring.test.mybatis.domain.RealEstate">
+ 		UPDATE
+ 			real_estate
+ 		Set
+ 			type = #{type}
+ 			, price = #{price}
+ 			, updatedAt = now()
+ 		WHERE
+ 			id = #{id}
+ 	</update>
+ 	<delete id="deleteRealEstate" parameterType="int">
+ 		DELETE 
+ 		FROM
+ 			real_estate
+ 		WHERE
+ 			id = #{id}
+ 	</delete>
  </mapper>

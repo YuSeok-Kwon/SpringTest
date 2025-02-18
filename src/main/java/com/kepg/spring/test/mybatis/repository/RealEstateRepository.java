@@ -27,4 +27,8 @@ public interface RealEstateRepository {
 			);
 	
 	public int insertRealEstateByObject(RealEstate realEstate);
+	
+	public int updateRealEstateByObject(RealEstate realEstate);
+	
+	public int deleteRealEstate(@Param("id") int id);
 }

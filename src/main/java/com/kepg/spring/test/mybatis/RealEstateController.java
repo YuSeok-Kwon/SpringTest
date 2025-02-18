@@ -20,14 +20,14 @@ public class RealEstateController {
 	private RealEstateService realEstateService;
 	// 파라미터 전달 받고 전달 받은 값과 일치하는 행 불러오기
 	RealEstate realEstate = null;
-	@RequestMapping("/1")
+	@RequestMapping("/select/1")
 	@ResponseBody
 	public RealEstate realEstateId (@RequestParam("id") int id) {
 		RealEstate realEstate = realEstateService.getRealEstateId(id);
 		return realEstate;
 	}
 	
-	@RequestMapping("/2")
+	@RequestMapping("/select/2")
 	@ResponseBody
 	public List<RealEstate> realEstateByRentPrice (@RequestParam("rentPrice") int rentPrice) {
 		List<RealEstate> realEstate = new ArrayList<>();
@@ -35,7 +35,7 @@ public class RealEstateController {
 		return realEstate;
 	}
 	
-	@RequestMapping("/3")
+	@RequestMapping("/select/3")
 	@ResponseBody
 	public List<RealEstate> realEstateByAreaPrice (
 			@RequestParam("area") int area
@@ -45,4 +45,27 @@ public class RealEstateController {
 		return realEstate;
 	}
 	
+	@RequestMapping("/insert/1")
+	@ResponseBody
+	public int createRealEstate() {
+		int count = realEstateService.addRealEstate(3, "푸르지용 리버 303동 1104호", 89, "매매", 100000);
+		return count;
+	}
+	
+	@RequestMapping("/insert/2")
+	@ResponseBody
+	public int createRealEstate(
+			@RequestParam("realtorId") int realtorId) {
+		RealEstate realEstate = new RealEstate();
+		
+		realEstate.setRealtorId(realtorId);
+		realEstate.setAddress("썅데빌리버 오피스텔 814호");
+		realEstate.setArea(45);
+		realEstate.setType("월세");
+		realEstate.setPrice(100000);
+		realEstate.setRentPrice(120);
+		
+		int count = realEstateService.addRealEstate(realEstate);
+		return count;
+	}
 }

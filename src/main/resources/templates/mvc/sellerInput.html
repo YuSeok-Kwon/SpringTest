@@ -9,7 +9,8 @@
 	<div class="container mt-5 ">
 		<h2 class="display-6 fw-bold">판매자 추가</h2>
 		
-		<form method="get" action="/mvc/seller/create">
+		<form method="post" action="/mvc/seller/create">
+    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="col-3 mb-3 ">
 			<label>닉네임</label>
 			<input type="text" name="nickname" class="form-control">

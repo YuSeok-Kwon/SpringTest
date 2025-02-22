@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kepg.spring.test.mvc.domain.Seller;
 import com.kepg.spring.test.mvc.service.SellerService;
@@ -23,8 +23,8 @@ public class SellerController {
 		return "/mvc/sellerInput";
 	}
 	
-	@ResponseBody
-	@GetMapping("/create")
+	
+	@PostMapping("/create")
 	public String createSeller(
 			@RequestParam("nickname") String nickname
 			, @RequestParam("profileimage") String profileimage
@@ -32,7 +32,7 @@ public class SellerController {
 			) {
 	int count = sellerService.addSeller(nickname, profileimage, temperature);
 	
-	return count + "행 입력 성공!";
+	return "redirect:/mvc/seller/info/1";
 		
 	}
 	
@@ -46,12 +46,12 @@ public class SellerController {
 	}
 	
 	@GetMapping("/info/2")
-	public String infoSeller(Model model, @RequestParam(value = "id", defaultValue = "0") int id) {
+	public String infoSeller(Model model, @RequestParam(value = "id", defaultValue = "-1") int id) {
 		
 		Seller seller = sellerService.infoSeller(id);
 		model.addAttribute("seller", seller);
 		
-		if(id == 0) {
+		if(id == -1) {
 			return "/mvc/sellerError";
 		} else {
 		return "/mvc/sellerInfo";

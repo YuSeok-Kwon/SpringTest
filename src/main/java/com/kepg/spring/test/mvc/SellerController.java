@@ -52,7 +52,7 @@ public class SellerController {
 		model.addAttribute("seller", seller);
 		
 		if(id == -1) {
-			return "/mvc/sellerError";
+			return "redirect:/mvc/seller/info/1";
 		} else {
 		return "/mvc/sellerInfo";
 		}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.kepg.spring.test.thymeleaf.weatherhistory.repository.WeatherhistoryRepository">
+ 	<select id="selectWeatherHistory" resultType="com.kepg.spring.test.thymeleaf.weatherhistory.domain.WeatherHistory">
+ 		SELECT
+ 			id
+ 			, date
+ 			, weather
+ 			, temperatures
+ 			, precipitaion
+ 			, microDust
+ 			, windSpeed
+ 			, createdAt
+ 			, updatedAt
+ 		FROM
+ 			weatherhistory
+ 	</select>
+ 	<insert id="insertWeatherHistory" parameterType="com.kepg.spring.test.thymeleaf.weatherhistory.domain.WeatherHistory">
+	    INSERT INTO weatherhistory
+	    (
+	        date,
+	        weather,
+	        temperatures,
+	        precipitaion,
+	        microDust,
+	        windSpeed,
+	        createdAt,
+	        updatedAt
+	    )
+	    VALUES
+	    (
+	        #{date},
+	        #{weather},
+	        #{temperatures},
+	        #{precipitaion},
+	        #{microDust},
+	        #{windSpeed},
+	        NOW(),
+	        NOW()
+	    )
+	</insert>
+ </mapper>

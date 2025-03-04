@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,9 +52,32 @@ public class FavoriteController {
 	public String selectFavorit(Model model) {
 		List<Favorite> favorite = service.selectFavorite();
 		
-		model.addAttribute("favorite", favorite);
+		model.addAttribute("favorites", favorite);
 		
 		return "/ajax/favoriteList";
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/duplicate-url")
+	public Map<String, Boolean> isDuplicate(
+			@RequestParam("url") String url
+			) {
+		boolean duplicate = service.isDuplicate(url);
+		Map<String, Boolean> resultMap = new HashMap<>();
+		resultMap.put("isDuplicate", duplicate);
+		
+		return resultMap;
+	}
+	
+	@ResponseBody
+	@PostMapping("/delete")
+	public Map<String, Boolean> deleteFavorite(
+			@RequestParam("id") Integer id
+			) {
+		Map<String, Boolean> resultMap = new HashMap<>();
+		resultMap.put("isDeleted", service.deleteFavorite(id));
+		
+		return resultMap;
 	}
 }

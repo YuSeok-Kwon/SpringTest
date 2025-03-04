@@ -20,6 +20,7 @@
 	 			, NOW()
 	 		)
 	 </insert>
+	 
 	 <select id="selectFavorite"
 	 resultType="com.kepg.spring.test.ajax.domain.Favorite">
 	 	SELECT
@@ -31,4 +32,20 @@
 	 	FROM
 	 		favorite
 	 </select>
+	 
+	 <select id="selectCountByUrl" resultType="int">
+	 	SELECT
+	 		count(*)
+	 	FROM
+	 		favorite
+	 	WHERE
+	 		url = #{url}
+	 </select>
+	 
+	 <delete id="deleteById" parameterType="int">
+	 	DELETE FROM
+	 		favorite
+	 	WHERE
+	 		id = #{id}
+	 </delete>
  </mapper>

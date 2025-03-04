@@ -14,9 +14,18 @@
 		</div>
 		<div class="mb-3">
 			<label class="label-control mb-2">주소</label><br>
-			<input type="text" class="form-control" id="urlInput">
+			<div class="d-flex"  style="height : 40px">
+				<input type="text" class="form-control" id="urlInput">
+				<button type="button" id="checkBtn" class="btn btn-success text-white ms-2 col-1">중복확인</button>
+			</div>
+			<div class="d-none text-danger" id="hideBox" style="font-size : 10px">
+				중복된 url입니다.
+			</div>
+			<div class="d-none text-primary" id="showBox" style="font-size : 10px">
+				사용가능한 url입니다.
+			</div>
 		</div>
-		<button type="button" class="btn btn-success col-12" id="addBtn">추가</button>
+		<button  type="button" class="btn btn-success col-12 mt-3" id="addBtn">추가</button>
 	</div>
 	
 	
@@ -26,6 +35,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script>
 	$(function(){
+		$("#checkBtn").on("click", function(){
+			let url = $("#urlInput").val();
+			
+			if(url == ""){
+				alert("유효한 url을 입력해주세요");
+			}
+			
+			$.ajax({
+				type : "post"
+				, url : "/ajax/favorite/duplicate-url"
+				, data : {"url" : url}
+				, success : function(response){
+					if(response.isDuplicate){
+						$("#showBox").addClass("d-none");
+						$("#hideBox").removeClass("d-none");
+					} else {
+						$("#showBox").removeClass("d-none");
+						$("#hideBox").addClass("d-none");
+					}
+				}
+				, error : function(){
+					alert("중복 확인 오류!");
+				}
+			})
+		})
+		
 		$("#addBtn").on("click", function(){
 			let urlName = $("#urlNameInput").val();
 			let url = $("#urlInput").val();

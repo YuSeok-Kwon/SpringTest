@@ -1,0 +1,66 @@
+#wrap {
+  height: 700px;
+  margin: 0 auto;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+}
+.form-control {
+  width: 250px;
+}
+header {
+  height: 60px;
+}
+main .contents {
+  color: white;
+  /* height: 500px; */
+}
+nav {
+  background-color: peru;
+}
+
+.banner > .banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+main .reservationInfo {
+  height: 270px;
+  background-color: rgb(140, 67, 15);
+}
+main .reservation-btn {
+  background-color: rgb(140, 67, 15);
+  font-size: 40px;
+}
+main .checkReservation {
+  height: 270px;
+  background-color: chocolate;
+}
+
+.checkReservation .login-input {
+  display: inline-block;
+}
+.checkReservation label {
+  font-size: 13px;
+}
+.id-input label,
+.password-input label,
+.name-input label,
+.phonenumber-input label,
+.date-input label {
+  width: 80px;
+}
+
+main .reservation-call {
+  height: 270px;
+  background-color: rgb(140, 67, 15);
+}
+
+footer {
+  height: 50px;
+}
+.copyright {
+  font-size: 7px;
+  color: rgb(197, 194, 194);
+}

@@ -36,23 +36,35 @@ public class CompanyService {
 		
 		Optional<Company> optionalCompany = repository.findById(id);
 		
-		Company company = optionalCompany.orElse(null);
+		//isPresent -> Null이면 false 아니면 true return
+		if(optionalCompany.isPresent()) {
+			Company company = optionalCompany.get();
 		
-		company = company.toBuilder()
-		.scale(scale)
-		.headcount(headcount)
-		.build();
 		
-		Company result = repository.save(company);
-		
-		return result;
+	//		Company company = optionalCompany.orElse(null);
+			
+			company = company.toBuilder()
+			.scale(scale)
+			.headcount(headcount)
+			.build();
+			
+			Company result = repository.save(company);
+			
+			return result;
+		}
+			return null;
 	}
 	
 	public void deleteCompany(int id) {
 		Optional<Company> optionalCompany = repository.findById(id);
 		
-		Company company = optionalCompany.orElse(null);
+//		if(optionalCompany.isPresent()) {
+//			Company company = optionalCompany.get();
+//			
+//			repository.delete(company);
+//		}
 		
-		repository.delete(company);
+		// 람다식 표현법
+		optionalCompany.ifPresent(company -> repository.delete(company));
 	}
 }
